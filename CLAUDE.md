@@ -11,7 +11,7 @@ Galexora is a Galaxy Explorer web application that allows users to browse and se
 - **Styling**: Tailwind CSS 4 with CSS variables
 - **UI Components**: shadcn/ui (New York style)
 - **Icons**: Lucide React, React Icons
-- **Language**: JavaScript (JSX) - no TypeScript
+- **Language**: TypeScript (strict mode enabled)
 
 ## Directory Structure
 
@@ -19,21 +19,21 @@ Galexora is a Galaxy Explorer web application that allows users to browse and se
 galexora/
 ├── src/
 │   ├── app/                    # Next.js App Router
-│   │   ├── layout.js           # Root layout with fonts
-│   │   ├── page.js             # Main Galaxy Explorer page
+│   │   ├── layout.tsx          # Root layout with fonts
+│   │   ├── page.tsx            # Main Galaxy Explorer page
 │   │   ├── globals.css         # Global styles and CSS variables
 │   │   └── favicon.ico
 │   ├── components/
 │   │   └── ui/                 # shadcn/ui components
-│   │       ├── button.jsx
-│   │       ├── card.jsx
-│   │       └── input.jsx
+│   │       ├── button.tsx
+│   │       ├── card.tsx
+│   │       └── input.tsx
 │   └── lib/
-│       └── utils.js            # Utility functions (cn helper)
+│       └── utils.ts            # Utility functions (cn helper)
 ├── icons/                      # App icons
 ├── package.json
 ├── components.json             # shadcn/ui configuration
-├── jsconfig.json               # Path aliases
+├── tsconfig.json               # TypeScript configuration
 ├── eslint.config.mjs           # ESLint flat config
 ├── next.config.mjs             # Next.js configuration
 └── postcss.config.mjs          # PostCSS with Tailwind plugin
@@ -53,14 +53,18 @@ npm start
 
 # Run ESLint
 npm run lint
+
+# Type check
+npx tsc --noEmit
 ```
 
 ## Code Conventions
 
 ### File Naming
 - React components: `PascalCase` (e.g., `GalaxyPage`)
-- Files: `lowercase` with hyphens for UI components (e.g., `button.jsx`)
-- Use `.jsx` extension for React components (not `.tsx` - project uses JavaScript)
+- Files: `lowercase` with hyphens for UI components (e.g., `button.tsx`)
+- Use `.tsx` extension for React components with JSX
+- Use `.ts` extension for pure TypeScript files
 
 ### Import Aliases
 - Use `@/` prefix for imports from `src/` directory
@@ -70,6 +74,13 @@ npm run lint
 - Use `"use client"` directive for client-side components with hooks
 - shadcn/ui components use `data-slot` attributes for styling hooks
 - Components accept `className` prop and merge with `cn()` utility
+- Define props interfaces for component type safety
+
+### TypeScript Guidelines
+- Use strict mode (`"strict": true` in tsconfig.json)
+- Define interfaces for data structures
+- Use proper typing for React events (e.g., `ChangeEvent<HTMLInputElement>`)
+- Export types alongside components when useful
 
 ### Styling
 - Use Tailwind CSS utility classes
@@ -88,6 +99,7 @@ Components are configured in `components.json`:
 - Base color: `neutral`
 - CSS variables: enabled
 - Icon library: `lucide`
+- TypeScript: enabled (`tsx: true`)
 
 Available components in `src/components/ui/`:
 - `Button` - with variants: default, destructive, outline, secondary, ghost, link
@@ -127,11 +139,12 @@ Three Google Fonts are loaded:
 
 | File | Purpose |
 |------|---------|
-| `src/app/page.js` | Main page component with planet data and search |
-| `src/app/layout.js` | Root layout with metadata and fonts |
+| `src/app/page.tsx` | Main page component with planet data and search |
+| `src/app/layout.tsx` | Root layout with metadata and fonts |
 | `src/app/globals.css` | CSS variables, theme tokens, Tailwind config |
-| `src/lib/utils.js` | `cn()` utility for className merging |
+| `src/lib/utils.ts` | `cn()` utility for className merging |
 | `components.json` | shadcn/ui component configuration |
+| `tsconfig.json` | TypeScript compiler configuration |
 
 ## ESLint Configuration
 
@@ -141,7 +154,7 @@ Uses flat config format with:
 
 ## Best Practices for AI Assistants
 
-1. **Preserve existing patterns**: Follow the established JSX/JavaScript conventions (not TypeScript)
+1. **Use TypeScript**: Follow TypeScript conventions with proper typing
 2. **Use path aliases**: Always use `@/` imports for src directory files
 3. **Component styling**: Use Tailwind classes with `cn()` for conditional styles
 4. **Client components**: Add `"use client"` when using React hooks
@@ -149,3 +162,4 @@ Uses flat config format with:
 6. **Environment variables**: Never commit API keys; use `NEXT_PUBLIC_` prefix for client-side vars
 7. **Responsive design**: Use Tailwind responsive prefixes (sm:, md:, lg:)
 8. **Dark mode**: Use CSS variables that support `.dark` class variants
+9. **Type safety**: Define interfaces for props, state, and API responses
