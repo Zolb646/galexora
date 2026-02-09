@@ -17,6 +17,7 @@ const navItems: NavItem[] = [
   { label: "Galaxy Map", href: "#galaxy-map" },
   { label: "Discoveries", href: "#discoveries" },
   { label: "Technology", href: "#technology" },
+  { label: "APOD", href: "#apod" },
   { label: "Join Mission", href: "#contact" },
 ];
 

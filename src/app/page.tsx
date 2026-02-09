@@ -6,6 +6,7 @@ import { AboutSection } from "@/components/sections/about-section";
 import { GalaxyMapSection } from "@/components/sections/galaxy-map-section";
 import { DiscoveriesSection } from "@/components/sections/discoveries-section";
 import { TechnologySection } from "@/components/sections/technology-section";
+import { ApodSection } from "@/components/sections/apod-section";
 import { ContactSection } from "@/components/sections/contact-section";
 
 export default function GalexoraPage() {
@@ -28,6 +29,9 @@ export default function GalexoraPage() {
 
       {/* Technology Section */}
       <TechnologySection />
+
+      {/* NASA APOD Section */}
+      <ApodSection />
 
       {/* Contact Section */}
       <ContactSection />
