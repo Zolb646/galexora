@@ -122,7 +122,7 @@
 .heroPhoto {
   position: relative;
   width: min(100%, 68rem);
-  height: clamp(19rem, 47vw, 34rem);
+  aspect-ratio: 2 / 1;
   margin-inline: auto;
   overflow: clip;
 }
@@ -290,7 +290,6 @@
 
 @media (max-width: 760px) {
   .heroIntro { grid-template-columns: minmax(0, 1fr); }
-  .heroPhoto { height: clamp(11rem, 52vw, 24rem); }
   .timeline, .apodEntry { grid-template-columns: minmax(0, 1fr); }
   .timelineRow:is(:first-child, :last-child) { display: block; }
   .timelineRow:is(:first-child, :last-child) figure { margin-bottom: .9rem; }

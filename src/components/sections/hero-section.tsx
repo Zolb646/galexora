@@ -24,12 +24,11 @@ export function HeroSection() {
             alt={saturn.alt}
             fill
             preload
-            quality={90}
-            sizes="(max-width: 1088px) 100vw, 1088px"
+            unoptimized
           />
         </div>
         <figcaption>
-          <a href={saturn.source}>Saturn, photographed by Cassini <ArrowUpRight size={14} aria-hidden="true" /></a>
+          <a href={saturn.source}>Saturn through Hubble’s lens <ArrowUpRight size={14} aria-hidden="true" /></a>
           <span>{saturn.credit}</span>
         </figcaption>
       </figure>

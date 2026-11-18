@@ -67,10 +67,10 @@ export const observations: Record<string, Observation> = {
     source: "https://science.nasa.gov/photojournal/cassini-jupiter-portrait/",
   },
   saturn: {
-    src: "/observations/saturn-cassini.webp",
-    alt: "Sunlit Saturn and its wide, banded rings in a natural-color mosaic from Cassini",
-    credit: "NASA / JPL / Space Science Institute",
-    source: "https://science.nasa.gov/photojournal/the-greatest-saturn-portrait-yet/",
+    src: "/observations/saturn-hubble.webp",
+    alt: "Hubble’s view of Saturn’s golden cloud bands framed by bright, tilted rings",
+    credit: "NASA, ESA, A. Simon, M. H. Wong, and the OPAL Team",
+    source: "https://science.nasa.gov/asset/hubble/saturn-2019/",
   },
   uranus: {
     src: "/observations/uranus.webp",
