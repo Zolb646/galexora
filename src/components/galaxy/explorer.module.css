@@ -1,0 +1,270 @@
+.explorer {
+  --signal: var(--accent);
+  --raised: #1b262c;
+}
+
+.explorer :is(button, a):focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+
+.layout {
+  display: grid;
+  grid-template:
+    "planets details" auto
+    "chart chart" auto
+    / clamp(8rem, 16vw, 12rem) minmax(0, 1fr);
+  gap: 1rem clamp(1rem, 2vw, 1.75rem);
+}
+
+.directory {
+  grid-area: planets;
+  display: grid;
+  align-content: start;
+  gap: .28rem;
+}
+
+.directory button {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  min-width: 0;
+  min-height: 3.1rem;
+  padding: .45rem .7rem;
+  border: 1px solid transparent;
+  border-radius: .28rem;
+  color: var(--muted);
+  font-size: .86rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.directory button:hover { color: var(--ink); background: var(--surface); }
+.directory button[aria-pressed="true"] { border-color: #6a858e; background: var(--raised); color: var(--ink); }
+
+.thumbnail {
+  width: 1.55rem;
+  height: 1.55rem;
+  flex: none;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #040506;
+}
+
+.details {
+  grid-area: details;
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: clamp(.8rem, 4vw, 1.7rem);
+  align-items: center;
+  min-width: 0;
+  padding: clamp(.7rem, 2.3vw, 1.55rem);
+  border: 1px solid var(--line);
+  border-radius: .8rem;
+  background: var(--surface);
+}
+
+.observation { min-width: 0; margin: 0; }
+.planetImage {
+  position: relative;
+  display: block;
+  aspect-ratio: 1.23;
+  overflow: hidden;
+  border-radius: .52rem;
+  background: #000;
+}
+.planetImage img { object-fit: contain; }
+.observation figcaption { margin-top: .4rem; color: var(--muted); font-size: .69rem; }
+
+.detailCopy { display: grid; min-width: 0; gap: .7rem; }
+.detailHeader p, .navigation > span {
+  color: var(--muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: .71rem;
+}
+.details h3 {
+  line-height: 1;
+  letter-spacing: -.054em;
+  font-size: clamp(2.1rem, 4.4vw, 3.7rem);
+  font-weight: 750;
+}
+.description { max-width: 43ch; color: var(--muted); line-height: 1.6; font-size: .88rem; }
+
+.stats { display: grid; margin: 0; }
+.stats > div { display: flex; align-items: baseline; justify-content: space-between; gap: .35rem .5rem; padding: .48rem 0; border-top: 1px solid var(--line); }
+.stats dt { color: var(--muted); font-size: .74rem; }
+.stats dd { margin: 0; text-align: right; font-size: .77rem; font-weight: 670; }
+.measurementSources { display: flex; flex-wrap: wrap; gap: .3rem .7rem; color: var(--muted); font-size: .71rem; }
+.measurementSources a { text-decoration: underline; text-underline-offset: .19em; }
+.measurementSources a:hover { color: var(--signal); }
+
+.navigation { display: flex; align-items: center; justify-content: space-between; gap: .35rem; }
+.navigation button {
+  display: grid;
+  width: 2.15rem;
+  flex: none;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: .45rem;
+  color: var(--signal);
+  background: var(--raised);
+  cursor: pointer;
+}
+.navigation button:hover { border-color: var(--signal); }
+
+.chart {
+  grid-area: chart;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: .8rem;
+  background: var(--surface);
+}
+
+.chart summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  min-height: 3.25rem;
+  padding: .65rem 1rem;
+  font-weight: 620;
+  list-style: none;
+  cursor: pointer;
+}
+.chart summary::-webkit-details-marker { display: none; }
+.chart summary:hover { color: var(--signal); }
+.chart[open] summary { border-bottom: 1px solid var(--line); }
+.chart[open] summary svg { rotate: 180deg; }
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .4rem .6rem;
+  padding: .62rem .72rem;
+}
+.toolbarTitle { display: flex; align-items: center; gap: .65rem; }
+.toolbarTitle strong { font-size: .88rem; }
+.motionStatus { display: inline-flex; align-items: center; gap: .3rem; color: var(--muted); font-size: .68rem; }
+.motionStatus i { width: .35rem; height: .35rem; border-radius: 50%; background: #aab7bd; }
+.motionStatus[data-playing="true"] i { background: var(--signal); }
+.toolbar .motionButton { min-height: 2.25rem; border-color: var(--line); background: var(--raised); color: var(--ink); }
+.toolbar .motionButton:hover { border-color: var(--signal); background: var(--raised); color: var(--ink); }
+
+.chart figure { margin: 0; padding: clamp(.7rem, 4vw, 2.5rem) 1rem 1rem; }
+.chart figcaption { margin-top: .25rem; text-align: center; color: var(--muted); font-size: .68rem; line-height: 1.35; }
+.map {
+  position: relative;
+  width: min(93%, 49rem);
+  aspect-ratio: 2.15;
+  margin: 1.25rem auto;
+  rotate: -9deg;
+  background: radial-gradient(ellipse at center, #ac703225, transparent 65%);
+  isolation: isolate;
+}
+
+.sun, .orbitPath, .orbiter { position: absolute; top: 50%; left: 50%; translate: -50% -50%; }
+.sun {
+  z-index: 1;
+  width: clamp(.85rem, 5%, 1.45rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 31%, #fff7d1 4%, #ffe29c 49%, #df8658 100%);
+  box-shadow: 0 0 1.6rem #ffc47886;
+  pointer-events: none;
+}
+.orbitPath, .orbiter {
+  width: var(--orbit-diameter);
+  height: var(--orbit-diameter);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.orbitPath { border: 1px solid #b5c3ce4d; }
+.orbitPath[data-active="true"] { border-color: var(--signal); box-shadow: 0 0 1rem #a5d7e128; }
+.orbiter { z-index: 2; }
+.map[data-running="true"] .planetNode { animation-play-state: running; }
+.orbiter[data-active="true"] { z-index: 3; }
+.orbiter:focus-within { z-index: 4; }
+
+@keyframes orbit {
+  from { offset-distance: var(--orbit-phase); }
+  to { offset-distance: calc(var(--orbit-phase) + 100%); }
+}
+
+.planetNode {
+  position: absolute;
+  top: 0;
+  left: 0;
+  offset-path: ellipse(50% 50% at 50% 50%);
+  offset-rotate: 0deg;
+  offset-distance: var(--orbit-phase);
+  animation: orbit var(--orbit-period) linear infinite paused;
+  display: grid;
+  width: 1.7rem;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.planetDot {
+  position: relative;
+  display: block;
+  width: var(--planet-size);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 29% 24%, #fff9, transparent 48%), var(--planet-color);
+  box-shadow: 0 0 .5rem color-mix(in srgb, var(--planet-color), transparent 60%);
+  transition: scale 160ms ease;
+}
+.planetLabel {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  translate: -50% 0;
+  rotate: 9deg;
+  padding: .12rem .38rem;
+  border-radius: .25rem;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: .68rem;
+  line-height: 1.4;
+  pointer-events: none;
+}
+
+.planetNode:is(:hover, :focus-visible) .planetDot { scale: 1.22; }
+.planetNode[aria-pressed="true"] .planetDot::before { position: absolute; inset: -4px; border: 1px solid var(--signal); border-radius: 50%; content: ""; }
+.planetDot[data-ringed="true"]::after { position: absolute; inset: 36% -37%; transform: rotate(-24deg); border: 1px solid #f5dba9b5; border-radius: 50%; content: ""; }
+
+@media (max-width: 820px) {
+  .layout { grid-template: "planets" auto "details" auto "chart" auto / minmax(0, 1fr); }
+  .directory { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .directory button {
+    justify-content: center;
+    gap: .35rem;
+    padding-inline: .2rem;
+    border-color: var(--line);
+  }
+}
+
+@media (max-width: 620px) {
+  .details { grid-template-columns: minmax(0, 1fr); }
+  .planetImage { aspect-ratio: 1.48; }
+  .directory button { gap: .2rem; font-size: .69rem; }
+  .map { aspect-ratio: 1.65; }
+  .thumbnail { width: 1rem; height: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .map[data-motion="system"] .planetNode { animation-play-state: paused; }
+
+  /* The Play button explicitly opts this chart into motion. */
+  .map[data-motion="manual"] .planetNode {
+    animation-duration: var(--orbit-period) !important;
+    animation-iteration-count: infinite !important;
+  }
+
+  .planetDot { transition: none; }
+}

@@ -1,63 +1,40 @@
-"use client";
-
 import { Navbar } from "@/components/navigation/navbar";
 import { HeroSection } from "@/components/sections/hero-section";
-import { AboutSection } from "@/components/sections/about-section";
 import { GalaxyMapSection } from "@/components/sections/galaxy-map-section";
-import { DiscoveriesSection } from "@/components/sections/discoveries-section";
-import { TechnologySection } from "@/components/sections/technology-section";
+import { HistorySection } from "@/components/sections/history-section";
 import { ApodSection } from "@/components/sections/apod-section";
-import { ContactSection } from "@/components/sections/contact-section";
+import { planetDistances, planetMeasurements } from "@/data/planets";
+import { APOD_ARCHIVE } from "@/lib/apod";
+import styles from "./field-guide.module.css";
+
+export const revalidate = 1800;
 
 export default function GalexoraPage() {
   return (
-    <main className="relative min-h-screen overflow-x-hidden">
-      {/* Navigation */}
+    <div className={styles.site}>
+      <a className={styles.skip} href="#main-content">Skip to content</a>
       <Navbar />
-
-      {/* Hero Section */}
-      <HeroSection />
-
-      {/* About Section */}
-      <AboutSection />
-
-      {/* Galaxy Map Section */}
-      <GalaxyMapSection />
-
-      {/* Discoveries Section */}
-      <DiscoveriesSection />
-
-      {/* Technology Section */}
-      <TechnologySection />
-
-      {/* NASA APOD Section */}
-      <ApodSection />
-
-      {/* Contact Section */}
-      <ContactSection />
-
-      {/* Footer */}
-      <footer className="relative border-t border-white/10 py-8">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="flex flex-col items-center justify-between gap-4 text-center md:flex-row md:text-left">
-            <div className="text-sm text-white/40">
-              &copy; {new Date().getFullYear()} Galexora Mission. All rights
-              reserved.
-            </div>
-            <div className="flex items-center gap-6 text-sm text-white/40">
-              <a href="#" className="hover:text-white transition-colors">
-                Mission Logs
-              </a>
-              <a href="#" className="hover:text-white transition-colors">
-                Privacy Protocol
-              </a>
-              <a href="#" className="hover:text-white transition-colors">
-                Contact HQ
-              </a>
-            </div>
+      <main id="main-content">
+        <HeroSection />
+        <div className={styles.guide}>
+          <GalaxyMapSection />
+          <HistorySection />
+          <ApodSection />
+        </div>
+      </main>
+      <footer id="about" className={styles.footer}>
+        <div>
+          <div>
+            <strong>Galexora</strong>
+            <p>An independent guide to planetary science and the history of space exploration.</p>
           </div>
+          <nav aria-label="Data sources">
+            <a href={planetDistances}>NASA planet guide</a>
+            <a href={planetMeasurements}>JPL planetary measurements</a>
+            <a href={APOD_ARCHIVE}>NASA APOD archive</a>
+          </nav>
         </div>
       </footer>
-    </main>
+    </div>
   );
 }

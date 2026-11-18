@@ -21,8 +21,8 @@ const inter = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Galexora - Explore Beyond the Known Universe",
-  description: "Join Galexora on an epic journey through the cosmos. Discover planets, alien civilizations, and cosmic mysteries in this immersive galaxy exploration experience.",
+  title: "Galexora | A field guide to the solar system",
+  description: "Explore the eight planets, documented milestones in space exploration, and NASA’s Astronomy Picture of the Day.",
   keywords: ["galaxy", "space exploration", "planets", "cosmos", "universe", "galexora"],
 };
 

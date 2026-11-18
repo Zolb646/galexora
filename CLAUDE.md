@@ -111,22 +111,9 @@ Available components in `src/components/ui/`:
 npx shadcn@latest add [component-name]
 ```
 
-## Environment Variables
+## NASA APOD
 
-Required environment variable:
-- `NEXT_PUBLIC_NASA_KEY` - NASA API key for APOD endpoint
-
-Create a `.env.local` file:
-```
-NEXT_PUBLIC_NASA_KEY=your_nasa_api_key
-```
-
-## API Integration
-
-The app fetches NASA's Astronomy Picture of the Day:
-- Endpoint: `https://api.nasa.gov/planetary/apod`
-- Requires API key via query parameter
-- Includes fallback UI when API is unavailable
+The server reads NASA Science’s public APOD Basic JSON endpoint without credentials. It uses `hdurl` for the featured image and `permalink` for the full entry. The feed revalidates every 30 minutes. An unavailable feed shows a link to the official APOD archive.
 
 ## Fonts
 
@@ -139,7 +126,7 @@ Three Google Fonts are loaded:
 
 | File | Purpose |
 |------|---------|
-| `src/app/page.tsx` | Main page component with planet data and search |
+| `src/app/page.tsx` | Field guide with the planet explorer, timeline, and NASA APOD |
 | `src/app/layout.tsx` | Root layout with metadata and fonts |
 | `src/app/globals.css` | CSS variables, theme tokens, Tailwind config |
 | `src/lib/utils.ts` | `cn()` utility for className merging |
@@ -159,7 +146,7 @@ Uses flat config format with:
 3. **Component styling**: Use Tailwind classes with `cn()` for conditional styles
 4. **Client components**: Add `"use client"` when using React hooks
 5. **shadcn/ui**: Use existing components from `src/components/ui/` when possible
-6. **Environment variables**: Never commit API keys; use `NEXT_PUBLIC_` prefix for client-side vars
+6. **Environment variables**: Keep private credentials server-side
 7. **Responsive design**: Use Tailwind responsive prefixes (sm:, md:, lg:)
 8. **Dark mode**: Use CSS variables that support `.dark` class variants
 9. **Type safety**: Define interfaces for props, state, and API responses

@@ -18,15 +18,7 @@
   --cosmic-gold: oklch(0.75 0.15 85);
   --cosmic-purple: oklch(0.45 0.25 300);
 
-  /* Nebula gradient background */
-  --geist-background: linear-gradient(
-    135deg,
-    oklch(0.05 0.02 280) 0%,
-    oklch(0.10 0.08 280) 25%,
-    oklch(0.12 0.12 260) 50%,
-    oklch(0.08 0.10 300) 75%,
-    oklch(0.05 0.02 280) 100%
-  );
+  --geist-background: #0c1013;
   --geist-foreground: #ffffff;
   --geist-foreground-secondary: #a0aec0;
   --geist-foreground-tertiary: #718096;
@@ -78,6 +70,12 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {

@@ -1,31 +1,18 @@
-"use client";
-
-import { motion } from "framer-motion";
+import type { CSSProperties } from "react";
+import styles from "./explorer.module.css";
 
 interface OrbitPathProps {
-  radius: number; // percentage
-  duration?: number;
-  color?: string;
+  diameter: number;
+  active: boolean;
 }
 
-export function OrbitPath({
-  radius,
-  duration = 100,
-  color = "rgba(255, 255, 255, 0.1)",
-}: OrbitPathProps) {
-  const size = radius * 2;
-
+export function OrbitPath({ diameter, active }: OrbitPathProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5 }}
-      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
-      style={{
-        width: `${size}%`,
-        height: `${size}%`,
-        border: `1px dashed ${color}`,
-      }}
+    <span
+      aria-hidden="true"
+      className={styles.orbitPath}
+      data-active={active}
+      style={{ "--orbit-diameter": `${diameter}%` } as CSSProperties}
     />
   );
 }

@@ -1,88 +1,38 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+import type { CSSProperties } from "react";
 import type { Planet } from "@/data/planets";
+import styles from "./explorer.module.css";
 
 interface PlanetNodeProps {
   planet: Planet;
-  isSelected: boolean;
-  onClick: () => void;
-  animationOffset?: number;
+  diameter: number;
+  phase: number;
+  selected: boolean;
+  onSelect: () => void;
 }
 
-export function PlanetNode({
-  planet,
-  isSelected,
-  onClick,
-  animationOffset = 0,
-}: PlanetNodeProps) {
-  const baseSize = 12 * planet.size;
+export function PlanetNode({ planet, diameter, phase, selected, onSelect }: PlanetNodeProps) {
+  const style = {
+    "--orbit-diameter": `${diameter}%`,
+    "--orbit-period": `${planet.animationSeconds}s`,
+    "--orbit-phase": `${phase}%`,
+    "--planet-color": planet.color,
+    "--planet-size": `${planet.diagramSize}px`,
+  } as CSSProperties;
 
   return (
-    <motion.div
-      className="absolute left-1/2 top-1/2"
-      style={{
-        width: `${planet.orbitRadius * 2}%`,
-        height: `${planet.orbitRadius * 2}%`,
-        marginLeft: `-${planet.orbitRadius}%`,
-        marginTop: `-${planet.orbitRadius}%`,
-      }}
-      animate={{ rotate: 360 }}
-      transition={{
-        duration: planet.orbitDuration,
-        repeat: Infinity,
-        ease: "linear",
-        delay: animationOffset,
-      }}
-    >
-      {/* Planet positioned on orbit */}
-      <motion.button
-        onClick={onClick}
-        className={cn(
-          "absolute -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-300",
-          "hover:scale-125 focus:outline-none focus:ring-2 focus:ring-cosmic-cyan focus:ring-offset-2 focus:ring-offset-transparent",
-          isSelected && "ring-2 ring-cosmic-cyan scale-125"
-        )}
-        style={{
-          width: baseSize,
-          height: baseSize,
-          backgroundColor: planet.color,
-          boxShadow: isSelected
-            ? `0 0 20px ${planet.color}, 0 0 40px ${planet.color}50`
-            : `0 0 10px ${planet.color}50`,
-          left: "100%",
-          top: "50%",
-        }}
-        whileHover={{
-          boxShadow: `0 0 30px ${planet.color}, 0 0 60px ${planet.color}50`,
-        }}
-        // Counter-rotate to keep planet upright
-        animate={{ rotate: -360 }}
-        transition={{
-          duration: planet.orbitDuration,
-          repeat: Infinity,
-          ease: "linear",
-          delay: animationOffset,
-        }}
+    <div className={styles.orbiter} style={style} data-active={selected}>
+      <button
+        type="button"
+        className={styles.planetNode}
+        tabIndex={-1}
+        aria-label={`Select ${planet.name} on the map`}
+        aria-pressed={selected}
+        title={planet.name}
+        onClick={onSelect}
       >
-        {/* Planet rings for Saturn */}
-        {planet.id === "saturn" && (
-          <div
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/30"
-            style={{
-              width: baseSize * 1.8,
-              height: baseSize * 0.5,
-              transform: "translate(-50%, -50%) rotate(-20deg)",
-            }}
-          />
-        )}
-
-        {/* Planet name tooltip */}
-        <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap text-[10px] font-medium text-white/70 opacity-0 transition-opacity group-hover:opacity-100">
-          {planet.name}
-        </span>
-      </motion.button>
-    </motion.div>
+        <span aria-hidden="true" className={styles.planetDot} data-ringed={planet.id === "saturn"} />
+        {selected && <span aria-hidden="true" className={styles.planetLabel}>{planet.name}</span>}
+      </button>
+    </div>
   );
 }
